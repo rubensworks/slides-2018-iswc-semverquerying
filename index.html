@@ -79,11 +79,91 @@
       </ul>
     </section>
     
+    <section id="rdf-versioning" class="slide">
+      <h2>RDF Versioning</h2>
+      <div class="next">
+          <h3 style="margin-bottom: 0em">RDF Version <em>(i)</em></h3>
+          <p class="indent">Set of triples annotated with version label <em>i</em></p>
+      </div>
+      <div class="next">
+          <p><h3>Query atoms</h3></p>
+          <ul>
+              <li><strong>Version Materialization (VM)</strong>:
+                  <p style="float: right; color: gray; font-style: italic">Which cities existed in (DBpedia) 2016?</p>
+                  <br/>
+                  <span class="indent">Query a <em>single</em> version</span>
+              </li>
+              <li><strong>Delta Materialization (DM)</strong>:
+                  <p style="float: right; color: gray; font-style: italic">Which cities were created or<br />removed between 2015 and 2016?</p>
+                  <br/>
+                  <span class="indent">Query <em>differences</em> between 2 versions</span>
+              </li>
+              <li><strong>Version Query (VQ)</strong>:
+                  <p style="float: right; color: gray; font-style: italic">In which years has Brussels existed?</p>
+                  <br/>
+                  <span style="display: block" class="indent">Query <em>all</em> versions,<br />results are <em>annotated</em> with their versions</span>
+              </li>
+          </ul>
+      </div>
+    </section>
+    
     <section id="index-rdfsemanticversioning" class="slide index">
       <ul>
         <li><a href="#index-rdfversioning">RDF Versioned Querying</a></li>
         <li class="current"><a href="#index-rdfsemanticversioning">RDF Semantic Versioned Querying</a></li>
         <li><a href="#index-poc">Proof of Concept</a></li>
+      </ul>
+    </section>
+    
+    <section id="structural-query-atoms" class="slide center">
+      <h2 class="big" style="margin-top: 4em; font-size: 1.9em">VM, DM and VQ are <em>structural</em> query atoms.</h2>
+      <h2 class="big" style="font-size: 1.45em">They do not take into account the <em>semantics</em> of the data.</h2>
+    </section>
+    
+    <section id="example-sdm" class="slide">
+      <h2>Example: Semantic Delta Materialization</h2>
+      <code>Version 0:
+    ex:Bob a ex:Animal.
+    ex:Bob foaf:name "Bob".
+
+Version 1:
+    ex:Bob a ex:Cat.
+    ex:Bob foaf:name "Bob".
+
+Language:
+    ex:Cat rdf:subClassOf ex:Animal.</code>
+    <div>
+        <div style="float: left">
+            <h3>Delta Materialization</h3>
+            <code>- ex:Bob a ex:Animal.
++ ex:Bob a ex:Cat.</code>
+        </div>
+        <div style="float: right">
+            <h3><strong>Semantic</strong> Delta Materialization</h3>
+            <code>+ ex:Bob a ex:Cat.</code>
+        </div>
+    </div>
+    </section>
+    
+    <section id="semantic-versioned-querying" class="slide">
+      <h2>Semantic query atoms</h2>
+      <h3>Semantic extension of the regular query atoms</h3>
+      <ul>
+          <li><strong>Semantic Version Materialization (S-VM)</strong>:
+              <br/>
+              <br/>
+              <span class="indent">Query over the <em>semantic closure</em> of a <em>single</em> version</span>
+          </li>
+          <li><strong>Semantic Delta Materialization (S-DM)</strong>:
+              <br/>
+              <br/>
+              <span class="indent">Query <em>differences</em> between the <em>semantic closure</em> of 2 versions</span>
+          </li>
+          <li><strong>Semantic Version Query (S-VQ)</strong>:
+              <br/>
+              <br/>
+              <span style="display: block" class="indent">Query the <em>semantic closure</em> of <em>all</em> versions,<br />results are <em>annotated</em> with their versions</span>
+          </li>
       </ul>
     </section>
     

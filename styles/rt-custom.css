@@ -196,6 +196,8 @@ li.inactive {
 
 .slide code {
     background: none;
+    display: block;
+    white-space: pre;
 }
 
 .slide tr:not(:last-of-type) > * {
