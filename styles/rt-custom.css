@@ -198,6 +198,12 @@ li.inactive {
     background: none;
 }
 
+.slide pre {
+    line-height: 1em;
+    display: block;
+    white-space: pre;
+}
+
 .slide tr:not(:last-of-type) > * {
     background: none;
 }
