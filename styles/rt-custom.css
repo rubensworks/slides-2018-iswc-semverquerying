@@ -196,6 +196,10 @@ li.inactive {
 
 .slide code {
     background: none;
+}
+
+.slide pre {
+    line-height: 1em;
     display: block;
     white-space: pre;
 }

@@ -58,8 +58,8 @@
       <h2 class="big">How can we combine<br /><em>versioned querying</em> with <em>reasoning</em>?</h2>
       <h2 class="big">And what are its <em>advantages</em>?</h2>
       <ul style="font-style: italic">
-          <li>Reduction of storage requirements?</li>
-          <li>Flexible range of knowledge w.r.t. available reasoning rules?</li>
+          <li>Reduction of storage requirements</li>
+          <li>Flexible range of knowledge w.r.t. available reasoning rules</li>
       </ul>
     </section>
     
@@ -122,7 +122,7 @@
     
     <section id="example-sdm" class="slide">
       <h2>Example: Semantic Delta Materialization</h2>
-      <code>Version 0:
+      <pre>Version 0:
     ex:Bob a ex:Animal.
     ex:Bob foaf:name "Bob".
 
@@ -131,16 +131,16 @@ Version 1:
     ex:Bob foaf:name "Bob".
 
 Language:
-    ex:Cat rdf:subClassOf ex:Animal.</code>
+    ex:Cat rdf:subClassOf ex:Animal.</pre>
     <div>
         <div style="float: left">
             <h3>Delta Materialization</h3>
-            <code>- ex:Bob a ex:Animal.
-+ ex:Bob a ex:Cat.</code>
+            <pre>- ex:Bob a ex:Animal.
++ ex:Bob a ex:Cat.</pre>
         </div>
         <div style="float: right">
             <h3><strong>Semantic</strong> Delta Materialization</h3>
-            <code>+ ex:Bob a ex:Cat.</code>
+            <pre>+ ex:Bob a ex:Cat.</pre>
         </div>
     </div>
     </section>
@@ -172,6 +172,120 @@ Language:
         <li><a href="#index-rdfversioning">RDF Versioned Querying</a></li>
         <li><a href="#index-rdfsemanticversioning">RDF Semantic Versioned Querying</a></li>
         <li class="current"><a href="#index-poc">Proof of Concept</a></li>
+      </ul>
+    </section>
+    
+    <section id="ostrich" class="slide">
+      <h2>OSTRICH: a versioned triple store</h2>
+      <ul>
+          <li>Compressed storage of multiple versions</li>
+          <li>Supports stream-based VM, DM and VQ queries</li>
+          <li>No support for <em>semantic</em> query atoms</li>
+      </ul>
+      <div class="center">
+          <img src="img/ostrich-square.png" width="120px" />
+      </div>
+    </section>
+    
+    <section id="prototype-architecture" class="slide">
+      <h2>Implementing the semantic query atoms<br />on top of OSTRICH</h2>
+      <ul>
+          <li>Separated storage of <em>data</em> and <em>language</em> versions</li>
+          <li><em>Backwards rule-based reasoner</em> accepts rules in <em>Notation 3</em> syntax</li>
+          <li>Iterative <em>reasoning at query-time</em></li>
+      </ul>
+      <div class="center">
+          <img src="img/architecture.svg" width="480px" />
+      </div>
+    </section>
+    
+    <section id="evaluation-setup" class="slide">
+      <h2>Evaluation using the BEAR benchmark</h2>
+      <ul>
+          <li><strong>BEAR</strong>: RDF versioning benchmark with versioned datasets and queries.</li>
+          <li>We created a derived version of the <em>BEAR-B-daily</em> dataset.</li>
+          <li>
+              <ul>
+                  <li>Removal of <code>rdf:type</code> relations inferrable through <code>rdfs:subClassOf</code>.</li>
+                  <li>Original: <strong>48,914</strong> triples in 88 versions</li>
+                  <li>Derived: <strong>31,761</strong> triples in 88 versions <em>(35,07% reduction)</em></li>
+              </ul>
+          </li>
+      </ul>
+      <div class="center">
+          <img src="img/bear.png" width="200px" />
+      </div>
+    </section>
+    
+    <section id="evaluation-results" class="slide">
+        <h2>~8 structural queries needed<br />per semantic query</h2>
+        <table>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Original dataset</th>
+                <th>Derived dataset</th>
+                <th>Structural queries</th>
+            </tr>
+            <tr>
+                <td><strong>Q1</strong></td>
+                <td>0.56 ms</td>
+                <td>2.51 ms</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td><strong>Q2</strong></td>
+                <td>0.47 ms</td>
+                <td>2.26 ms</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td><strong>Q3</strong></td>
+                <td>0.63 ms</td>
+                <td>1.76 ms</td>
+                <td>9</td>
+            </tr>
+            <tr>
+                <td><strong>Q4</strong></td>
+                <td>0.58 ms</td>
+                <td>1.55 ms</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td><strong>Q5</strong></td>
+                <td>0.33 ms</td>
+                <td>0.97 ms</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td><strong>Q6</strong></td>
+                <td>0.15 ms</td>
+                <td>0.94 ms</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td><strong>Q7</strong></td>
+                <td>0.26 ms</td>
+                <td>0.89 ms</td>
+                <td>6</td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="evaluation-setup" class="slide">
+      <h2>Conclusion: Combining <em>reasoning</em> and <em>versioned querying</em> is beneficial</h2>
+      <ul>
+          <li><h3>+ Not storing inferrable knowledge reduces storage requirements</h3></li>
+          <li><h3>+ Flexible range of knowledge by applying different reasoning rules</h3></li>
+          <li>
+              <h3>- Inference increases slows down querying</h3>
+              <span class="indent">Our wrapper-based prototype is sub-optimal, room for optimizations</span>
+          </li>
+          <li>
+              <ul>
+                  <li>Inspiration from related domains: <em>OBDA, RDF Stream Reasoning</em></li>
+                  <li>Native implementation</li>
+              </ul>
+          </li>
       </ul>
     </section>
 
