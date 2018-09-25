@@ -83,6 +83,7 @@
       <h2>RDF Versioning</h2>
       <div class="next">
           <h3 style="margin-bottom: 0em">RDF Version <em>(i)</em></h3>
+          <p style="float: right; color: gray; font-style: italic">DBpedia 2015, DBpedia 2016, ...</p>
           <p class="indent">Set of triples annotated with version label <em>i</em></p>
       </div>
       <div class="next">
@@ -107,6 +108,31 @@
       </div>
     </section>
     
+    <section id="example-sdm" class="slide">
+          <h2>Example</h2>
+          <pre>Version 0:
+    ex:Bob a ex:Animal.
+    ex:Bob foaf:name "Bob".
+
+Version 1:
+    ex:Bob a ex:Cat.
+    ex:Bob foaf:name "Bob".
+</pre>
+<pre class="next">Language:
+    ex:Cat rdf:subClassOf ex:Animal.</pre>
+        <div>
+            <div style="float: left">
+                <h3>Delta Materialization</h3>
+                <pre>- ex:Bob a ex:Animal.
++ ex:Bob a ex:Cat.</pre>
+            </div>
+            <div style="float: right" class="next">
+                <h3><strong>Semantic</strong> Delta Materialization</h3>
+                <pre>+ ex:Bob a ex:Cat.</pre>
+            </div>
+        </div>
+    </section>
+    
     <section id="index-rdfsemanticversioning" class="slide index">
       <ul>
         <li><a href="#index-rdfversioning">RDF Versioned Querying</a></li>
@@ -118,31 +144,6 @@
     <section id="structural-query-atoms" class="slide center">
       <h2 class="big" style="margin-top: 4em; font-size: 1.9em">VM, DM and VQ are <em>structural</em> query atoms.</h2>
       <h2 class="big" style="font-size: 1.45em">They do not take into account the <em>semantics</em> of the data.</h2>
-    </section>
-    
-    <section id="example-sdm" class="slide">
-      <h2>Example: Semantic Delta Materialization</h2>
-      <pre>Version 0:
-    ex:Bob a ex:Animal.
-    ex:Bob foaf:name "Bob".
-
-Version 1:
-    ex:Bob a ex:Cat.
-    ex:Bob foaf:name "Bob".
-
-Language:
-    ex:Cat rdf:subClassOf ex:Animal.</pre>
-    <div>
-        <div style="float: left">
-            <h3>Delta Materialization</h3>
-            <pre>- ex:Bob a ex:Animal.
-+ ex:Bob a ex:Cat.</pre>
-        </div>
-        <div style="float: right">
-            <h3><strong>Semantic</strong> Delta Materialization</h3>
-            <pre>+ ex:Bob a ex:Cat.</pre>
-        </div>
-    </div>
     </section>
     
     <section id="semantic-versioned-querying" class="slide">
@@ -179,8 +180,7 @@ Language:
       <h2>OSTRICH: a versioned triple store</h2>
       <ul>
           <li>Compressed storage of multiple versions</li>
-          <li>Supports stream-based VM, DM and VQ queries</li>
-          <li>No support for <em>semantic</em> query atoms</li>
+          <li>Supports stream-based structural VM, DM and VQ queries</li>
       </ul>
       <div class="center">
           <img src="img/ostrich-square.png" width="120px" />
