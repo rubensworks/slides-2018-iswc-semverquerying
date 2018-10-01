@@ -56,6 +56,7 @@
     
     <section id="research-question" class="slide center">
       <h2 class="big" style="margin-top: 3em">How can we combine<br /><em>versioned querying</em> with <em>reasoning</em>?</h2>
+      TODO: give an example earlier!
     </section>
     
     <section id="index" class="slide index">
@@ -175,7 +176,7 @@ Version 1:
       <h2>OSTRICH: a versioned triple store</h2>
       <ul>
           <li>Compressed storage of multiple versions</li>
-          <li>Supports stream-based structural VM, DM and VQ queries</li>
+          <li>Supports stream-based structural VM, DM and VQ triple pattern queries</li>
       </ul>
       <div class="center">
           <img src="img/ostrich-square.png" width="120px" />
@@ -187,7 +188,7 @@ Version 1:
       <ul>
           <li>Separated storage of <em>data</em> and <em>language</em> versions</li>
           <li><em>Backwards rule-based reasoner</em> accepts rules in <em>Notation 3</em> syntax</li>
-          <li>Iterative <em>reasoning at query-time</em></li>
+          <li>Iterative <em>query-time reasoning</em>: 1 semantic query => multiple structural queries</li>
       </ul>
       <div class="center">
           <img src="img/architecture.svg" width="480px" />
@@ -197,7 +198,7 @@ Version 1:
     <section id="evaluation-setup" class="slide">
       <h2>Evaluation using the BEAR benchmark</h2>
       <ul>
-          <li><strong>BEAR</strong>: RDF versioning benchmark with versioned datasets and queries.</li>
+          <li><strong>Goal:</strong> Compare pre-inferred dataset with inference at query-time.</li>
           <li>We created a derived version of the <em>BEAR-B-daily</em> dataset.</li>
           <li>
               <ul>
