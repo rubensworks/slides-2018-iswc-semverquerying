@@ -44,19 +44,48 @@
       <p class="affiliation"><sup>2</sup><a href="https://www.nii.ac.jp/en/">National Institute of Informatics, Sokendai University, Japan</a></p>
     </section>
     
-    <section id="start" class="slide center" style="background-image: url('img/waterbook.jpg'); background-size: cover">
-        <h2 class="big" style="margin-top: 20px; color: white; text-shadow: 2px 2px black; text-align:left">Reasoning allows us to <em>infer</em> facts<br />from <em>core knowledge</em></h2>
+    <section id="start" class="slide center" style="background-image: url('img/boxes.jpg'); background-size: cover">
+        <h2 class="big" style="margin-top: 40px; color: white; text-shadow: 5px 5px black; text-align:left"><strong>Versioning:</strong> Variants of datasets exist<br />in parallel</h2>
+        <p>
+            <ul style="margin-top: -20px; margin-left: 20px; color: white; text-shadow: 2px 2px black; text-align:left; font-size: 1.2em;" class="next">
+                <li>DBpedia 2015</li>
+                <li>DBpedia 2016</li>
+                <li>DBpedia 2014</li>
+                <li>...</li>
+            </ul>
+        </p>
+        <h2 class="next" style="margin-top: 40px; margin-left: 50px; color: white; text-shadow: 2px 2px black; text-align:left">
+            Which cities were created or removed between 2015 and 2016?
+        </h2>
     </section>
     
-    <section id="intro" class="slide">
-      <h2>What happens when this <em>core knowledge</em> is <em>versioned</em>?</h2>
-      <p class="next"><strong>Versioned</strong>: different versions of a dataset can exist next to each other.</p>
-      <p class="next"><strong>Stream reasoning</strong> is related to this,<br />but focuses on versions with a <em>linear temporal relation</em>.</p>
+    <section id="example" class="slide">
+          <h2>Versioning Example</h2>
+          <pre>Version A:
+    ex:Bob a ex:Animal.
+    ex:Bob foaf:name "Bob".
+
+Version B:
+    ex:Bob a ex:Cat.
+    ex:Bob foaf:name "Bob".
+</pre>
+<pre class="next">Language:
+    ex:Cat rdf:subClassOf ex:Animal.</pre>
+        <div>
+            <div style="float: left">
+                <h3>Difference between version A and B</h3>
+                <pre>- ex:Bob a ex:Animal.
++ ex:Bob a ex:Cat.</pre>
+            </div>
+            <div style="float: right; width: 350px;" class="next">
+                <h3><strong>Semantic</strong> Difference</h3>
+                <pre>+ ex:Bob a ex:Cat.</pre>
+            </div>
+        </div>
     </section>
     
     <section id="research-question" class="slide center">
       <h2 class="big" style="margin-top: 3em">How can we combine<br /><em>versioned querying</em> with <em>reasoning</em>?</h2>
-      TODO: give an example earlier!
     </section>
     
     <section id="index" class="slide index">
@@ -102,31 +131,6 @@
               </li>
           </ul>
       </div>
-    </section>
-    
-    <section id="example-sdm" class="slide">
-          <h2>Example</h2>
-          <pre>Version 0:
-    ex:Bob a ex:Animal.
-    ex:Bob foaf:name "Bob".
-
-Version 1:
-    ex:Bob a ex:Cat.
-    ex:Bob foaf:name "Bob".
-</pre>
-<pre class="next">Language:
-    ex:Cat rdf:subClassOf ex:Animal.</pre>
-        <div>
-            <div style="float: left">
-                <h3>Delta Materialization</h3>
-                <pre>- ex:Bob a ex:Animal.
-+ ex:Bob a ex:Cat.</pre>
-            </div>
-            <div style="float: right" class="next">
-                <h3><strong>Semantic</strong> Delta Materialization</h3>
-                <pre>+ ex:Bob a ex:Cat.</pre>
-            </div>
-        </div>
     </section>
     
     <section id="index-rdfsemanticversioning" class="slide index">
